@@ -69,6 +69,7 @@ public class ReqresInTests {
 
     @Test
     void unSuccessfulLoginWithEmptyDataTest() {
+        String body = "{ \"email\": \"sydney@fife\" }";
         given()
                 .log().uri()
                 .when()
@@ -81,19 +82,58 @@ public class ReqresInTests {
 
     @Test
     void SuccessfulCreateUserTest() {
-        String body = "{ \"name\": \"John Doe\", \"job\": \"doctor\" }";
-
+        String body = "{ \"name\": \"morpheus\",\n" +
+                "    \"job\": \"leader\" }";
         given()
                 .log().uri()
                 .body(body)
                 .contentType(JSON)
                 .when()
-                .post("https://reqres.in/api/login")
+                .post("https://reqres.in/api/users")
                 .then()
                 .log().status()
                 .log().body()
                 .statusCode(201)
                 .body("name", is("morpheus"));
     }
+
+    @Test
+    void ListUsersTest() {
+        given()
+                .log().uri()
+                .contentType(JSON)
+                .when()
+                .get("https://reqres.in/api/users?page=2")
+                .then()
+                .log().status()
+                .log().body()
+                .statusCode(200);
+    }
+
+    @Test
+    void Test() {
+        given()
+                .log().uri()
+                .contentType(JSON)
+                .when()
+                .get("https://reqres.in/api/users?page=2")
+                .then()
+                .log().status()
+                .log().body()
+                .statusCode(200);
+    }
+    @Test
+    void CreateOrderTest() {
+        given()
+                .log().uri()
+                .contentType(JSON)
+                .when()
+                .get("https://do90.do.rbstest.ru/payment/rest/register.do?userName=parakevich-api&password=testPwd&amount=5000&description=Описание заказа&returnUrl=https://google.com")
+                .then()
+                .log().status()
+                .log().body()
+                .statusCode(200);
+    }
+
 
 }
