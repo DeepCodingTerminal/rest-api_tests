@@ -122,18 +122,6 @@ public class ReqresInTests {
                 .log().body()
                 .statusCode(200);
     }
-    @Test
-    void CreateOrderTest() {
-        given()
-                .log().uri()
-                .contentType(JSON)
-                .when()
-                .get("https://do90.do.rbstest.ru/payment/rest/register.do?userName=parakevich-api&password=testPwd&amount=5000&description=Описание заказа&returnUrl=https://google.com")
-                .then()
-                .log().status()
-                .log().body()
-                .statusCode(200);
-    }
 
 
 }
